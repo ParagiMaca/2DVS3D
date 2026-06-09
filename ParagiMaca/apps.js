@@ -1,7 +1,7 @@
 // Konfigurasi Cloud Database GitHub API Anda
 const GITHUB_CONFIG = {
     username: "ParagiMaca",           
-    repo: "ParagiMaca",               
+    repo: "2DVS3D",               
     path: "manga_data.json",          
     get token() {
         return getExternalToken();
@@ -415,6 +415,9 @@ function navigateToNextChapter(targetChapterIdx) {
     saveAppState();
 }
 
+// -----------------------------------------------------
+// STATE & NAVIGASI PWA
+// -----------------------------------------------------
 function switchReaderMode(mode) { 
     currentReaderMode = mode; 
     currentPageIdx = 0;
@@ -924,9 +927,6 @@ async function pushDatabaseUpdate(commitMessage) {
     if (!pushResponse.ok) throw new Error("Database gagal disinkronkan ke Cloud GitHub.");
 }
 
-// -----------------------------------------------------
-// STATE & NAVIGASI PWA
-// -----------------------------------------------------
 function saveAppState() {
     const state = {
         currentPageState: currentPageState,
