@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Komik & Video</title>
+    <style>
+        /* RESET & DASAR */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* TIPOGRAFI TEKS SELAMAT DATANG (Meniru Gambar 1) */
+        .welcome-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            padding: 0 20px;
+            max-width: 600px;
+        }
+        .text-blue { color: #5a6cf3; }
+        .text-white { color: #c4c4c4; }
+        .text-yellow { color: #e8d05b; }
+
+        /* KOTAK APLIKASI (Meniru Gambar 1) */
+        .app-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .app-box {
+            width: 150px;
+            height: 150px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 10px rgba(255,255,255,0.1);
+        }
+        .app-box:hover { transform: scale(1.05); }
+        .app-box:active { transform: scale(0.95); }
+        
+        .app-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+        .videohub-logo {
+            background-color: #3b4cca;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+            font-weight: bold;
+            font-style: italic;
+            border-radius: 20px;
+        }
+
+        /* MODAL OVERLAY (Meniru Gambar 2 & 3) */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* KOTAK MODAL */
+        .modal-box {
+            background-color: #4a5dff; /* Biru terang seperti di gambar */
+            width: 90%;
+            max-width: 400px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        .modal-text {
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-style: italic;
+            font-weight: 800;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+        
+        /* INPUT API KEY */
+        .modal-input {
+            width: 100%;
+            background-color: #1a1b3c;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            outline: none;
+        }
+
+        /* TOMBOL MODAL */
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .btn {
+            padding: 10px 30px;
+            font-size: 1rem;
+            font-weight: 800;
+            font-style: italic;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.8; }
+        .btn-black { background-color: #000000; color: #ffffff; }
+        .btn-red { background-color: #ff0000; color: #ffffff; }
+
+    </style>
+</head>
+<body>
+
+    <!-- HALAMAN UTAMA -->
+    <div class="welcome-text">
+        <span class="text-blue">SELAMAT DATANG DI WEBSITE</span> <span class="text-white">KAMI</span><br><br>
+        <span class="text-blue">DISINI ANDA BISA MEMBACA</span> <span class="text-yellow">KOMIK</span><br>
+        <span class="text-blue">DAN MELIHAT TAUTAN DARI</span> <span class="text-yellow">VIDEO</span><br>
+        <span class="text-yellow">BERBAGAI GENRE</span>
+    </div>
+
+    <div class="app-container">
+        <!-- Tombol Paragimaca -->
+        <div class="app-box" onclick="handleAppClick('./paragimaca/index.html')">
+            <img src="https://i.ibb.co/R4PNCgBD/Gemini-Generated-Image-stlv2rstlv2rstlv.png" alt="Paragimaca">
+        </div>
+        <!-- Tombol VideoHub -->
+        <div class="app-box" onclick="handleAppClick('./videohub/index.html')">
+            <div class="videohub-logo">VideoHub</div>
+        </div>
+    </div>
+
+    <!-- MODAL 1: TANYA API KEY -->
+    <div id="modal-ask" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-text">APAKAH ANDA MEMPUNYAI API KEY?</div>
+            <div class="modal-buttons">
+                <button class="btn btn-black" onclick="showInputModal()">YA</button>
+                <button class="btn btn-red" onclick="proceedWithoutKey()">TIDAK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: INPUT API KEY -->
+    <div id="modal-input" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-text">SILAHKAN MASUKAN API KEY DISINI</div>
+            <input type="password" id="api-key-input" class="modal-input" placeholder="ghp_xxxxxxxxxxxx...">
+            <div class="modal-buttons">
+                <button class="btn btn-black" onclick="saveKeyAndProceed()">OKE</button>
+                <button class="btn btn-red" onclick="closeAllModals()">BATAL</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let targetAppUrl = "";
+
+        // Fungsi saat logo aplikasi diklik
+        function handleAppClick(url) {
+            targetAppUrl = url;
+            
+            // Cek apakah API Key sudah ada di LocalStorage
+            const hasParagiKey = localStorage.getItem('GITHUB_DB_TOKEN');
+            const hasVideoKey = localStorage.getItem('vokep_github_token');
+
+            if (hasParagiKey || hasVideoKey) {
+                // Jika sudah ada kunci, langsung masuk ke aplikasi
+                window.location.href = targetAppUrl;
+            } else {
+                // Jika belum, tampilkan Modal Tanya API Key (Gambar 2)
+                document.getElementById('modal-ask').classList.add('active');
+            }
+        }
+
+        // Fungsi Tombol YA (Buka modal input - Gambar 3)
+        function showInputModal() {
+            document.getElementById('modal-ask').classList.remove('active');
+            document.getElementById('modal-input').classList.add('active');
+            document.getElementById('api-key-input').focus();
+        }
+
+        // Fungsi Tombol TIDAK (Lanjut tanpa API Key - Mode Baca Saja)
+        function proceedWithoutKey() {
+            window.location.href = targetAppUrl;
+        }
+
+        // Fungsi Tombol OKE (Simpan Key dan Masuk)
+        function saveKeyAndProceed() {
+            const apiKey = document.getElementById('api-key-input').value.trim();
+            
+            if (apiKey !== "") {
+                // Simpan kunci untuk KEDUA aplikasi sekaligus berdasarkan kode JS asli mereka
+                localStorage.setItem('GITHUB_DB_TOKEN', apiKey); // Untuk Paragimaca
+                localStorage.setItem('vokep_github_token', apiKey); // Untuk VideoHub
+                
+                // Pindah ke aplikasi tujuan
+                window.location.href = targetAppUrl;
+            } else {
+                alert("API Key tidak boleh kosong jika memilih OKE!");
+            }
+        }
+
+        // Fungsi Tombol BATAL
+        function closeAllModals() {
+            document.getElementById('modal-ask').classList.remove('active');
+            document.getElementById('modal-input').classList.remove('active');
+            document.getElementById('api-key-input').value = ""; // Bersihkan input
+        }
+    </script>
+</body>
+</html>
