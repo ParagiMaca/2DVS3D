@@ -1,7 +1,7 @@
 // ==================== CONFIGURATION ====================
 const GITHUB_CONFIG = {
     username: "ParagiMaca",              // Username GitHub Anda
-    repo: "vokep",                       // Nama repositori Anda
+    repo: "2DVS3D",                       // Nama repositori Anda
     path: "video_data.json"              // Nama berkas database JSON
 };
 
