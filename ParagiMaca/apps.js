@@ -415,9 +415,6 @@ function navigateToNextChapter(targetChapterIdx) {
     saveAppState();
 }
 
-// -----------------------------------------------------
-// STATE & NAVIGASI PWA
-// -----------------------------------------------------
 function switchReaderMode(mode) { 
     currentReaderMode = mode; 
     currentPageIdx = 0;
@@ -927,6 +924,9 @@ async function pushDatabaseUpdate(commitMessage) {
     if (!pushResponse.ok) throw new Error("Database gagal disinkronkan ke Cloud GitHub.");
 }
 
+// -----------------------------------------------------
+// STATE & NAVIGASI PWA
+// -----------------------------------------------------
 function saveAppState() {
     const state = {
         currentPageState: currentPageState,
