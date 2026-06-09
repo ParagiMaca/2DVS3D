@@ -1,0 +1,689 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body {
+    background-color: #0f0f12;
+    color: #e4e4e7;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* HEADER STYLE */
+.viewer-header {
+    background: #18181c;
+    padding: 12px 16px; 
+    border-bottom: 1px solid #27272a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+h1 { 
+    font-size: 1.15rem; 
+    color: #fff; 
+    font-weight: 700; 
+    letter-spacing: -0.3px; 
+}
+
+/* Header link menu untuk Kontributor */
+.header-link-btn {
+    background: transparent;
+    color: #a1a1aa;
+    border: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    outline: none;
+}
+
+.header-link-btn:hover {
+    color: #fff;
+    background: #27272a;
+}
+
+.header-link-btn.active {
+    color: #fff;
+    background: #2563eb;
+}
+
+.clear-btn { 
+    background: #ef4444; 
+    color: white; 
+    border: none; 
+    padding: 6px 12px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-weight: 600; 
+    font-size: 0.8rem; 
+}
+
+/* BAR NAVIGASI HORIZONTAL TAB */
+.category-nav {
+    display: flex;
+    gap: 6px;
+    background: #18181c;
+    padding: 8px 12px; 
+    max-width: 1200px;
+    margin: 8px auto;
+    border-radius: 6px;
+    border: 1px solid #27272a;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.category-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-item {
+    color: #a1a1aa;
+    text-decoration: none;
+    padding: 6px 12px; 
+    font-size: 0.82rem; 
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all 0.2s;
+    display: inline-block;
+}
+
+.nav-item:hover, .nav-item.active {
+    background: #2563eb;
+    color: #fff;
+}
+
+/* PANEL FILTER BOX */
+.filter-panel-box {
+    background: #18181c;
+    max-width: 1200px;
+    margin: 0 12px 14px 12px; 
+    padding: 12px; 
+    border-radius: 6px;
+    border: 1px solid #27272a;
+}
+
+@media (min-width: 1200px) {
+    .filter-panel-box { margin: 0 auto 16px auto; }
+}
+
+.filter-header-title {
+    font-size: 0.88rem; 
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.filter-grid-inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 8px; 
+}
+
+.filter-group select {
+    width: 100%;
+    background: #202024;
+    color: #e4e4e7;
+    border: 1px solid #27272a;
+    padding: 8px 10px; 
+    border-radius: 5px;
+    font-size: 0.8rem; 
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+.search-apply-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.82rem; 
+    padding: 8px;
+    grid-column: 1 / -1;
+}
+
+@media (min-width: 768px) {
+    .filter-grid-inputs { grid-template-columns: repeat(4, 1fr) 90px; }
+    .search-apply-btn { grid-column: auto; }
+}
+
+/* GRID UTAMA KATALOG */
+.manga-grid-layout { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); 
+    gap: 12px; 
+    padding: 0 12px; 
+    max-width: 1200px; 
+    margin: 0 auto 30px auto; 
+}
+
+.manga-card-box { 
+    background: #18181c; 
+    border-radius: 6px; 
+    overflow: hidden; 
+    border: 1px solid #27272a; 
+    cursor: pointer; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.manga-card-box:hover { border-color: #2563eb; }
+.aspect-cover-holder { width: 100%; padding-top: 140%; position: relative; background: #222; }
+.aspect-cover-holder img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.manga-meta-title { 
+    padding: 8px; 
+    font-size: 0.78rem; 
+    font-weight: 600; 
+    color: #e4e4e7; 
+    line-height: 1.25; 
+    text-align: left; 
+    overflow: hidden; 
+    display: -webkit-box; 
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+}
+
+.status-msg { 
+    grid-column: 1/-1; 
+    text-align: center; 
+    color: #a1a1aa; 
+    padding: 30px 0; 
+    font-size: 0.82rem;
+}
+
+/* DETAIL & READER SECTION */
+.detail-container { max-width: 800px; margin: 16px auto; padding: 0 12px; }
+.detail-upper { display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center; margin-bottom: 20px; }
+
+@media (min-width: 768px) {
+    .detail-upper { flex-direction: row; text-align: left; align-items: flex-start; }
+}
+
+.detail-cover-box { width: 140px; border-radius: 6px; overflow: hidden; border: 1px solid #27272a; flex-shrink: 0; }
+.detail-cover-box img { width: 100%; height: auto; display: block; }
+.status-badge { background: #10b981; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; }
+.detail-genres { display: flex; gap: 6px; margin: 10px 0; flex-wrap: wrap; justify-content: center; }
+
+@media (min-width: 768px) { .detail-genres { justify-content: flex-start; } }
+
+.genre-tag { background: #27272a; padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; color: #a1a1aa; }
+.primary-btn { background: #2563eb; color: white; border: none; padding: 8px 16px; border-radius: 5px; font-weight: 600; cursor: pointer; width: 100%; font-size: 0.85rem; }
+
+@media (min-width: 768px) { .primary-btn { width: auto; } }
+
+.chapter-list { background: #18181c; border: 1px solid #27272a; border-radius: 6px; margin-top: 10px; }
+.chapter-item { display: flex; justify-content: space-between; padding: 12px 14px; border-bottom: 1px solid #27272a; cursor: pointer; font-size: 0.82rem; }
+.chapter-item:hover { color: #2563eb; background: #202024;}
+
+.reader-controls { background: #18181c; padding: 8px; border-bottom: 1px solid #27272a; position: sticky; top: 49px; z-index: 90; display: flex; justify-content: center; gap: 16px; }
+.reader-controls select { background: #202024; color: #fff; border: 1px solid #27272a; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; }
+#reader-container { background-color: #000; width: 100%; }
+.webtoon-stream-clean { display: flex; flex-direction: column; align-items: center; }
+.webtoon-stream-clean img { width: 100%; max-width: 700px; height: auto; display: block; margin: 0; padding: 0; border: none; }
+.manga-mode-layout { display: flex; justify-content: center; padding: 10px; }
+.manga-mode-layout img { max-width: 100%; max-height: 85vh; }
+
+/* ==========================================================================
+   DESAIN HALAMAN BARU: EDITOR KONTRIBUTOR KHUSUS (FULL PAGE)
+   ========================================================================== */
+.editor-page-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 16px 40px 16px;
+}
+
+.editor-header-box {
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.editor-sub-desc {
+    font-size: 0.8rem;
+    color: #a1a1aa;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+.full-page-card {
+    background: #18181c;
+    border: 1px solid #27272a;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.editor-field-lbl {
+    display: block;
+    font-size: 0.76rem;
+    color: #a1a1aa;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.genre-checkbox-box {
+    background: #202024; 
+    border: 1px solid #27272a; 
+    border-radius: 5px; 
+    max-height: 180px; 
+    overflow-y: auto; 
+    padding: 10px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px;
+}
+
+/* PANEL KONTRIBUTOR FORMULIR INPUT DATA LENGKAP */
+.upload-section-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.upload-section-title {
+    font-size: 1.1rem;
+    color: #3b82f6;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: normal;
+    margin-bottom: 0;
+}
+
+.form-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.form-input-group input, .form-input-group select, .form-input-group textarea {
+    width: 100%;
+    background: #202024;
+    color: #fff;
+    border: 1px solid #27272a;
+    padding: 10px 12px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    outline: none;
+}
+
+.form-input-group input:focus, .form-input-group textarea:focus {
+    border-color: #2563eb;
+}
+
+.upload-files-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+@media (min-width: 640px) {
+    .upload-files-row { flex-direction: row; }
+}
+
+.file-picker-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.file-picker-block span {
+    font-size: 0.78rem;
+    color: #a1a1aa;
+    font-weight: 600;
+}
+
+.file-picker-block input[type="file"] {
+    background: #202024;
+    color: #fff;
+    border: 1px solid #27272a;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+#upload-status-btn {
+    background: #10b981;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#upload-status-btn:hover {
+    background: #059669;
+}
+
+#upload-status-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* ==========================================================================
+   DESAIN: MODAL OVERLAY & FORM EDIT POSTINGAN MODERN (PARAGIMACA)
+   ========================================================================== */
+.edit-manga-btn {
+    background: #27272a;
+    color: #e4e4e7;
+    border: 1px solid #3f3f46;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.edit-manga-btn:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: white;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(9, 9, 11, 0.85);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+}
+
+.modal-content {
+    background: #18181c;
+    border: 1px solid #27272a;
+    width: 100%;
+    max-width: 640px;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+    background: #202024;
+    padding: 14px 16px;
+    border-bottom: 1px solid #27272a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+/* MODAL TABS */
+.modal-tabs {
+    display: flex;
+    background: #131316;
+    border-bottom: 1px solid #27272a;
+}
+
+.modal-tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #a1a1aa;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 0.82rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.modal-tab-btn:hover {
+    color: #fff;
+    background: #18181c;
+}
+
+.modal-tab-btn.active {
+    color: #3b82f6;
+    border-bottom-color: #3b82f6;
+    background: #18181c;
+}
+
+.close-modal-btn {
+    font-size: 1.4rem;
+    color: #a1a1aa;
+    cursor: pointer;
+    transition: color 0.15s;
+    line-height: 1;
+}
+
+.close-modal-btn:hover {
+    color: #fff;
+}
+
+.modal-body {
+    padding: 16px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.field-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #a1a1aa;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.genre-grid-checkbox {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 6px;
+    background: #202024;
+    border: 1px solid #27272a;
+    border-radius: 5px;
+    max-height: 110px;
+    overflow-y: auto;
+    padding: 8px;
+}
+
+.edit-chapter-list-section {
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid #27272a;
+}
+
+.section-sub-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.section-sub-header h4 {
+    font-size: 0.8rem;
+    color: #3b82f6;
+    font-weight: 700;
+}
+
+.page-url-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #18181c;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.page-num-lbl {
+    font-size: 0.72rem;
+    color: #a1a1aa;
+    font-weight: 600;
+    width: 42px;
+    flex-shrink: 0;
+}
+
+.edit-page-url-input {
+    flex: 1;
+    background: #202024;
+    color: #fff;
+    border: 1px solid #27272a;
+    padding: 5px 8px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    outline: none;
+}
+
+.edit-page-url-input:focus {
+    border-color: #2563eb;
+}
+
+.del-page-row-btn {
+    background: transparent;
+    border: none;
+    color: #ef4444;
+    font-size: 1.2rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 4px;
+}
+
+.del-page-row-btn:hover {
+    color: #f87171;
+}
+
+.action-light-btn {
+    background: #202024;
+    color: #e4e4e7;
+    border: 1px solid #27272a;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.action-light-btn:hover {
+    background: #27272a;
+    border-color: #3f3f46;
+}
+
+.action-light-btn.danger {
+    color: #ef4444;
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.action-light-btn.danger:hover {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: #ef4444;
+}
+
+.modal-footer {
+    background: #202024;
+    padding: 12px 16px;
+    border-top: 1px solid #27272a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* NAVIGASI TOC KUSTOM */
+.toc-navigation-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111115;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #27272a;
+    width: 100%;
+    max-width: 400px;
+    margin: 15px auto 0 auto;
+    gap: 12px;
+}
+
+.toc-nav-btn {
+    background: #202024;
+    color: #fff;
+    border: 1px solid #27272a;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: none;
+}
+
+.toc-nav-btn:hover {
+    background: #27272a;
+    border-color: #3f3f46;
+}
+
+.toc-nav-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* TOMBOL SCROLL MENGAMBANG */
+.floating-controls {
+    position: fixed;
+    right: 20px;
+    bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 500;
+}
+
+.scroll-float-btn {
+    background: rgba(37, 99, 235, 0.85);
+    backdrop-filter: blur(3px);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50px;
+    padding: 10px 14px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: background 0.2s, transform 0.15s;
+    outline: none;
+}
+
+.scroll-float-btn:hover {
+    background: rgba(37, 99, 235, 1);
+    transform: translateY(-2px);
+}
