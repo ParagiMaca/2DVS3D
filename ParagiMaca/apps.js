@@ -1,7 +1,7 @@
 // Konfigurasi Cloud Database GitHub API Anda
 const GITHUB_CONFIG = {
     username: "ParagiMaca",           
-    repo: "ParagiMaca",               
+    repo: "2DVS3D",               
     path: "manga_data.json",          
     get token() {
         return getExternalToken();
